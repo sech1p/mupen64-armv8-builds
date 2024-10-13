@@ -1,6 +1,6 @@
 #!/bin/bash
 
-tag_name=$1
+tag_name="$1"
 build_name=$2
 
 # in case if any commands returns a non-zero error code
@@ -15,7 +15,7 @@ fi
 git clone https://github.com/mupen64plus/mupen64plus-core.git --depth=1
 cd mupen64plus-core
 cd tools
-./build_bundle_src.sh $1 $2
+./build_bundle_src.sh $tag_name $build_name
 sudo apt install libsdl2-dev libboost-dev libboost-filesystem-dev libpng-dev libvulkan-dev
-cd "mupen64plus-bundle-$2"
+cd mupen64plus-bundle-$build_name
 sudo CFLAGS='-mtune=cortex-a53 -march=armv8-a' ./m64p-build.sh NEON=1 USE_GLES=1 VFP_HARD=1 NEW_DYNAREC=1
